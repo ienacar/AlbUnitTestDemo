@@ -58,11 +58,16 @@
     <Compile Include="Reservation\OfferedJourneyLocationConstaint.cs" />
     <Compile Include="Reservation\OtherExamples.cs" />
     <Compile Include="Reservation\ReservationCompanyComparerShould.cs" />
+    <Compile Include="Reservation\ReservationTicketPriceCalculatorShould.cs" />
     <Compile Include="Reservation\SeatCategoryAttribute.cs" />
     <Compile Include="Reservation\SeatShould.cs" />
+    <Compile Include="Reservation\TicketPriceData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Reservation\Data.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="C:\Users\ienacar\source\repos\UnitTestDemo\Coverage\Coverage.csproj">
