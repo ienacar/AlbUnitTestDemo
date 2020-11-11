@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace UnitTests.Reservation
 {
-    [Category("Seat")]
+    [SeatCategory]
     public class SeatShould
     {
         [Test]
