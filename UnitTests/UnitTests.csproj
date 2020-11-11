@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="Coverage\CoverageShould.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reservation\OtherExamples.cs" />
     <Compile Include="Reservation\SeatShould.cs" />
   </ItemGroup>
   <ItemGroup>

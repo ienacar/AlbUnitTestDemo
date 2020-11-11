@@ -9,8 +9,10 @@ using System.Threading.Tasks;
 
 namespace UnitTests.Reservation
 {
+    [Category("Seat")]
     public class SeatShould
     {
+
         [Test]
         public void ReturnPrice()
         {
