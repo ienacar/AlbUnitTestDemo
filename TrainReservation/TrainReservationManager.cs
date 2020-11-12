@@ -68,6 +68,7 @@ namespace ReservationLib
             try
             {
                 _applicantValidator.Validate(request.Applicant.Name, request.Applicant.TCKN);
+                _applicantValidator.Count++;
             }
             catch
             {

@@ -226,9 +226,39 @@ namespace UnitTests.TrainReservationTests
 
                 );
 
-            //mockApplicantValidator.Setup(x => x.ValidateResult).Returns(mockValidateResult.Object);
-            //mockValidateResult.Setup(x => x.IsValid).Returns(true);
 
+            //mockValidateResult.Setup(x => x.IsValid).Returns(true);
+            //mockApplicantValidator.Setup(x => x.ValidateResult).Returns(mockValidateResult.Object);
+
+            mockApplicantValidator.Setup(x => x.ValidateResult.IsValid).Returns(true);
+
+            TrainReservationManager manager = new TrainReservationManager(mockSeatValidator.Object, mockApplicantValidator.Object);
+            //act
+            manager.MakeReservation(request);
+            //assert
+            Assert.That(request.IsValid, Is.True);
+        }
+
+        [Test]
+        public void AcceptRequestWithMoqDependencyWithSetupBothDependencyWithSeatValidateOverrideCallbackTypeWithNestedPropertySetupAllProperty()
+        {
+            //arrange
+            var mockSeatValidator = new Mock<ISeatValidator>();
+            var mockApplicantValidator = new Mock<IApplicantValidator>();
+            //var mockValidateResult = new Mock<ValidateResult>();
+
+            mockSeatValidator.Setup(x => x.Validate("YHT1", "IST", new TrainSeat("1", 1), new DateTime(2020, 11, 12), ref It.Ref<VerificationStatus>.IsAny))
+                                    .Callback(
+                                        new ValidateCallback(
+                                            (string vehicleId, string country, Seat seats, DateTime date, ref VerificationStatus status) => status = new VerificationStatus(true))
+
+                );
+
+
+            //mockValidateResult.Setup(x => x.IsValid).Returns(true);
+            //mockApplicantValidator.Setup(x => x.ValidateResult).Returns(mockValidateResult.Object);
+
+            mockApplicantValidator.SetupAllProperties();
             mockApplicantValidator.Setup(x => x.ValidateResult.IsValid).Returns(true);
 
             TrainReservationManager manager = new TrainReservationManager(mockSeatValidator.Object, mockApplicantValidator.Object);
