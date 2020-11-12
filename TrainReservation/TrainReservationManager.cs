@@ -37,14 +37,14 @@ namespace ReservationLib
 
             _seatvalidator.Initialize();
 
-            //var isValidReservation = _seatvalidator.Validate(request.Train.VehicleId,request.Location.From,request.Train.Seat,request.Date);
+            var isValidReservation = _seatvalidator.Validate(request.Train.VehicleId, request.Location.From, request.Train.Seat, request.Date);
 
 
-            //if (!isValidReservation)
-            //{
-            //    request.Decline();
-            //    return request;
-            //}
+            if (!isValidReservation)
+            {
+                request.Decline();
+                return request;
+            }
 
             //bool IsValid = false;
             //_seatvalidator.Validate(request.Train.VehicleId, request.Location.From, request.Train.Seat, request.Date, out IsValid);
@@ -55,15 +55,15 @@ namespace ReservationLib
             //    return request;
             //}
 
-            VerificationStatus status = new VerificationStatus(false);
+            //VerificationStatus status = new VerificationStatus(false);
 
-            _seatvalidator.Validate(request.Train.VehicleId, request.Location.From, request.Train.Seat, request.Date, ref status);
+            //_seatvalidator.Validate(request.Train.VehicleId, request.Location.From, request.Train.Seat, request.Date, ref status);
 
-            if (!status.Passed)
-            {
-                request.Decline();
-                return request;
-            }
+            //if (!status.Passed)
+            //{
+            //    request.Decline();
+            //    return request;
+            //}
 
             try
             {

@@ -78,7 +78,9 @@
     <Compile Include="Reservation\SeatShould.cs" />
     <Compile Include="Reservation\TicketPriceData.cs" />
     <Compile Include="TrainReservationTests\BehaviorTests.cs" />
+    <Compile Include="TrainReservationTests\PartialMockTests.cs" />
     <Compile Include="TrainReservationTests\SeatValidatorImpl.cs" />
+    <Compile Include="TrainReservationTests\SeatValidatorWebServiceGateway.cs" />
     <Compile Include="TrainReservationTests\TrainReservationManagerShould.cs" />
   </ItemGroup>
   <ItemGroup>
