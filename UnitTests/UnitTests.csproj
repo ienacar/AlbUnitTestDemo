@@ -77,6 +77,8 @@
     <Compile Include="Reservation\SeatCategoryAttribute.cs" />
     <Compile Include="Reservation\SeatShould.cs" />
     <Compile Include="Reservation\TicketPriceData.cs" />
+    <Compile Include="TrainReservationTests\SeatValidatorImpl.cs" />
+    <Compile Include="TrainReservationTests\TrainReservationManagerShould.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -88,6 +90,10 @@
     <ProjectReference Include="..\DependencyInjection\DependencyInjection.csproj">
       <Project>{0AC7993B-8C32-4C07-A54E-C3A0DF08260C}</Project>
       <Name>DependencyInjection</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TrainReservation\TrainReservation.csproj">
+      <Project>{0660B59E-81B6-4EAC-A767-BBB9F1E57CAA}</Project>
+      <Name>TrainReservation</Name>
     </ProjectReference>
     <ProjectReference Include="C:\Users\ienacar\source\repos\UnitTestDemo\Coverage\Coverage.csproj">
       <Project>{BCE655AA-7CF2-4F5D-A962-C90DF95F64EF}</Project>

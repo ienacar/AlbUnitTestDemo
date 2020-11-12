@@ -16,8 +16,8 @@ namespace ReservationLib
         
         public TrainReservationManager(ISeatValidator seatvalidator, IApplicantValidator applicantValidator)
         {
-            _seatvalidator = seatvalidator ?? throw new ArgumentNullException(nameof(seatvalidator));
-            _applicantValidator = applicantValidator ?? throw new ArgumentNullException(nameof(applicantValidator));
+            _seatvalidator = seatvalidator; //?? throw new ArgumentNullException(nameof(seatvalidator));
+            _applicantValidator = applicantValidator; //?? throw new ArgumentNullException(nameof(applicantValidator));
         }
 
         public TrainReservation MakeReservation(TrainReservation request)
@@ -46,21 +46,21 @@ namespace ReservationLib
                 return request;
             }
 
-            try
-            {
-                _applicantValidator.Validate(request.Applicant.Name, request.Applicant.TCKN);
-            }
-            catch
-            {
-                request.Decline();
-                return request;
-            }
+            //try
+            //{
+            //    _applicantValidator.Validate(request.Applicant.Name, request.Applicant.TCKN);
+            //}
+            //catch
+            //{
+            //    request.Decline();
+            //    return request;
+            //}
 
-            if (!_applicantValidator.IsValid)
-            {
-                request.Decline();
-                return request;
-            }
+            //if (!_applicantValidator.IsValid)
+            //{
+            //    request.Decline();
+            //    return request;
+            //}
 
 
             request.Accept();

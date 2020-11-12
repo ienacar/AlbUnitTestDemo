@@ -15,6 +15,7 @@ namespace UnitTests.DependencyInjection
         {
             name = InjectionName;
         }
+
         public string GetName()
         {
             return name;
