@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NunitDemoLib", "C:\Users\ie
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{2378C778-33AD-42F4-8247-479632710330}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrainReservation", "TrainReservation\TrainReservation.csproj", "{0660B59E-81B6-4EAC-A767-BBB9F1E57CAA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DependencyInjection", "DependencyInjection\DependencyInjection.csproj", "{0AC7993B-8C32-4C07-A54E-C3A0DF08260C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{2378C778-33AD-42F4-8247-479632710330}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2378C778-33AD-42F4-8247-479632710330}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2378C778-33AD-42F4-8247-479632710330}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0660B59E-81B6-4EAC-A767-BBB9F1E57CAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0660B59E-81B6-4EAC-A767-BBB9F1E57CAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0660B59E-81B6-4EAC-A767-BBB9F1E57CAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0660B59E-81B6-4EAC-A767-BBB9F1E57CAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0AC7993B-8C32-4C07-A54E-C3A0DF08260C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AC7993B-8C32-4C07-A54E-C3A0DF08260C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AC7993B-8C32-4C07-A54E-C3A0DF08260C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AC7993B-8C32-4C07-A54E-C3A0DF08260C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

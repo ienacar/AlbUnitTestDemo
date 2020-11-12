@@ -63,7 +63,7 @@ namespace UnitTests.Reservation
             var calculator = new ReservationTicketPriceCalculator();
             //act
             var payment = calculator.CalculateTicketPrice(price, term, rate);
-            //
+            //assert
             Assert.That(payment,Is.EqualTo(expectedValue));
         }
 
