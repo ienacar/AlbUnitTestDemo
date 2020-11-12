@@ -128,5 +128,115 @@ namespace UnitTests.TrainReservationTests
             //assert
             Assert.That(request.IsValid, Is.True);
         }
+
+        [Test]
+        public void DeclineRequestWithMoqDependencyWithSetupBothDependencyApplicantValidateThrowException()
+        {
+            //arrange
+            var mockSeatValidator = new Mock<ISeatValidator>();
+            var mockApplicantValidator = new Mock<IApplicantValidator>();
+
+            mockSeatValidator.Setup(x => x.Validate("YHT1", "IST", new TrainSeat("1", 1), new DateTime(2020, 11, 12))).Returns(true);
+
+            mockApplicantValidator.Setup(x => x.Validate(It.IsAny<string>(), It.IsAny<string>())).Throws(new ArgumentException());
+            //mockApplicantValidator.Setup(x => x.IsValid).Returns(true);
+
+            TrainReservationManager manager = new TrainReservationManager(mockSeatValidator.Object, mockApplicantValidator.Object);
+            //act
+            manager.MakeReservation(request);
+            //assert
+            Assert.That(request.IsValid, Is.False);
+        }
+
+        [Test]
+        public void AcceptRequestWithMoqDependencyWithSetupBothDependencyWithSeatValidateOverrideOutParam()
+        {
+            //arrange
+            var mockSeatValidator = new Mock<ISeatValidator>();
+            var mockApplicantValidator = new Mock<IApplicantValidator>();
+
+            bool isValid = true;
+            mockSeatValidator.Setup(x => x.Validate("YHT1", "IST", new TrainSeat("1", 1), new DateTime(2020, 11, 12),out isValid));
+
+            mockApplicantValidator.Setup(x => x.IsValid).Returns(true);
+
+            TrainReservationManager manager = new TrainReservationManager(mockSeatValidator.Object, mockApplicantValidator.Object);
+            //act
+            manager.MakeReservation(request);
+            //assert
+            Assert.That(request.IsValid, Is.True);
+        }
+
+        delegate void ValidateCallback(string vehicleId, string country, Seat seats, DateTime date, ref VerificationStatus status);
+
+        [Test]
+        public void AcceptRequestWithMoqDependencyWithSetupBothDependencyWithSeatValidateOverrideCallbackType()
+        {
+            //arrange
+            var mockSeatValidator = new Mock<ISeatValidator>();
+            var mockApplicantValidator = new Mock<IApplicantValidator>();
+
+            mockSeatValidator.Setup(x => x.Validate("YHT1", "IST", new TrainSeat("1", 1), new DateTime(2020, 11, 12),ref It.Ref<VerificationStatus>.IsAny))
+                                    .Callback (
+                                        new ValidateCallback( 
+                                            (string vehicleId, string country, Seat seats, DateTime date, ref VerificationStatus status) => status = new VerificationStatus(true))
+
+                );
+
+            mockApplicantValidator.Setup(x => x.IsValid).Returns(true);
+
+            TrainReservationManager manager = new TrainReservationManager(mockSeatValidator.Object, mockApplicantValidator.Object);
+            //act
+            manager.MakeReservation(request);
+            //assert
+            Assert.That(request.IsValid, Is.True);
+        }
+
+        public interface INullInterface
+        {
+            string GetName();
+        }
+
+        [Test]
+        public void NullReturn()
+        {
+            //arrange
+            var mock = new Mock<INullInterface>();
+            mock.Setup(x => x.GetName());//.Returns<string>(null);
+            
+            //act
+            string returnValue = mock.Object.GetName();
+            
+            //assert
+            Assert.That(returnValue,Is.Null);
+        }
+
+        [Test]
+        public void AcceptRequestWithMoqDependencyWithSetupBothDependencyWithSeatValidateOverrideCallbackTypeWithNestedProperty()
+        {
+            //arrange
+            var mockSeatValidator = new Mock<ISeatValidator>();
+            var mockApplicantValidator = new Mock<IApplicantValidator>();
+            //var mockValidateResult = new Mock<ValidateResult>();
+
+            mockSeatValidator.Setup(x => x.Validate("YHT1", "IST", new TrainSeat("1", 1), new DateTime(2020, 11, 12), ref It.Ref<VerificationStatus>.IsAny))
+                                    .Callback(
+                                        new ValidateCallback(
+                                            (string vehicleId, string country, Seat seats, DateTime date, ref VerificationStatus status) => status = new VerificationStatus(true))
+
+                );
+
+            //mockApplicantValidator.Setup(x => x.ValidateResult).Returns(mockValidateResult.Object);
+            //mockValidateResult.Setup(x => x.IsValid).Returns(true);
+
+            mockApplicantValidator.Setup(x => x.ValidateResult.IsValid).Returns(true);
+
+            TrainReservationManager manager = new TrainReservationManager(mockSeatValidator.Object, mockApplicantValidator.Object);
+            //act
+            manager.MakeReservation(request);
+            //assert
+            Assert.That(request.IsValid, Is.True);
+        }
+
     }
 }
