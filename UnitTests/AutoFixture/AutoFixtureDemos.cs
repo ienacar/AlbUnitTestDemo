@@ -147,5 +147,97 @@ namespace UnitTests.AutoFixture
         {
             return "11111111112";
         }
+
+        [Test]
+        public void ApplicantAutofixtureWithGeneratorCheckGeneratedValue()
+        {
+            //arrange
+            var fixture = new Fixture();
+
+            //int age = fixture.Create<int>();
+            //fixture.Inject(age);
+            var age = fixture.Freeze<int>();
+
+            fixture.Inject<string>(DumyStringGenerator());
+            var applicant = fixture.Create<Applicant>();
+
+            //assert
+            Assert.That(applicant.Age,Is.EqualTo(age));
+        }
+
+        [Test]
+        public void CreteObjectWithExceptionProp()
+        {
+            var fixture = new Fixture();
+
+            var applicant = fixture.Build<Applicant>()
+                                    .Without(x => x.TCKN)
+                                    .Create();
+        }
+
+        [Test]
+        public void OmitObjectFixture()
+        {
+            var fixture = new Fixture();
+
+            var applicant = fixture.Build<Applicant>()
+                                    .OmitAutoProperties()
+                                    .Create();
+        }
+
+
+        [Test]
+        public void CreteObjectWithCustomProp()
+        {
+            var fixture = new Fixture();
+
+            var applicant = fixture.Build<Applicant>()
+                                    .With(x => x.TCKN, DumyStringGenerator)
+                                    .Create();
+        }
+
+        [Test]
+        public void OmitObjectFixtureAddSingleProp()
+        {
+            var fixture = new Fixture();
+
+            var applicant = fixture.Build<Applicant>()
+                                    .OmitAutoProperties()
+                                    .With(x => x.TCKN, DumyStringGenerator)
+                                    .Create();
+        }
+
+        [Test]
+        public void NestedObjectFixtureDemo()
+        {
+            var fixture = new Fixture();
+            var company = fixture.Create<Company>();
+        }
+
+        [Test]
+        public void NestedObjectFixtureDemoCustomProperties()
+        {
+            var fixture = new Fixture();
+
+            var vehicle1 = fixture.Build<Vehicle>()
+                                    .With(x => x.VehicleId, "v1")
+                                    .Create();
+
+            var vehicle2 = fixture.Build<Vehicle>()
+                                    .With(x => x.VehicleId, "v2")
+                                    .Without(x => x.Price)
+                                    .Do(x => x.Price = 100)
+                                    .Create();
+
+            var company1 = fixture.Build<Company>().Create();
+
+            var company2 = fixture.Build<Company>()
+                                    .Without(x => x.Vehicles)
+                                    .Do(x => x.Vehicles = new List<Vehicle>())
+                                    .Do(x => x.Vehicles.Add(vehicle1))
+                                    .Do(x => x.Vehicles.Add(vehicle2))
+                                    .Create();
+        }
+
     }
 }
