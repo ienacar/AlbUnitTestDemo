@@ -77,6 +77,8 @@
     <Compile Include="Reservation\SeatCategoryAttribute.cs" />
     <Compile Include="Reservation\SeatShould.cs" />
     <Compile Include="Reservation\TicketPriceData.cs" />
+    <Compile Include="TddTests\FizzBuzzManager.cs" />
+    <Compile Include="TddTests\FizzBuzzManagerShould.cs" />
     <Compile Include="TrainReservationTests\BehaviorTests.cs" />
     <Compile Include="TrainReservationTests\PartialMockTests.cs" />
     <Compile Include="TrainReservationTests\SeatValidatorImpl.cs" />
