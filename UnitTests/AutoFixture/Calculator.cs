@@ -9,7 +9,7 @@ namespace UnitTests.AutoFixture
     public class Calculator
     {
 
-        public int Value { get; set; }
+        public int Value { get; private set; }
 
         public void Addition(int number1)
         {

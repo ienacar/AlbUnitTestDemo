@@ -3,6 +3,7 @@ using NUnit.Framework.Constraints;
 using NunitDemoLib.Entity;
 using System;
 using System.Collections.Generic;
+using FluentAssertions;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,6 +34,7 @@ namespace UnitTests.Reservation
             //act
             //assert
             Assert.That(seat.SeatNumber, Is.EqualTo(5));
+            seat.SeatNumber.Should().Be(5);
         }
 
         [Test]

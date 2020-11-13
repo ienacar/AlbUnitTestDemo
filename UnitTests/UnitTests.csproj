@@ -40,6 +40,12 @@
     <Reference Include="AutoFixture, Version=4.14.0.0, Culture=neutral, PublicKeyToken=b24654c590009d4f, processorArchitecture=MSIL">
       <HintPath>..\packages\AutoFixture.4.14.0\lib\net452\AutoFixture.dll</HintPath>
     </Reference>
+    <Reference Include="AutoFixture.AutoMoq, Version=4.14.0.0, Culture=neutral, PublicKeyToken=b24654c590009d4f, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoFixture.AutoMoq.4.14.0\lib\net452\AutoFixture.AutoMoq.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoFixture.NUnit3, Version=4.14.0.0, Culture=neutral, PublicKeyToken=b24654c590009d4f, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoFixture.NUnit3.4.14.0\lib\net452\AutoFixture.NUnit3.dll</HintPath>
+    </Reference>
     <Reference Include="AutoFixture.SeedExtensions, Version=4.14.0.0, Culture=neutral, PublicKeyToken=b24654c590009d4f, processorArchitecture=MSIL">
       <HintPath>..\packages\AutoFixture.SeedExtensions.4.14.0\lib\net452\AutoFixture.SeedExtensions.dll</HintPath>
     </Reference>
@@ -48,6 +54,9 @@
     </Reference>
     <Reference Include="Fare, Version=2.1.0.0, Culture=neutral, PublicKeyToken=ea68d375bf33a7c8, processorArchitecture=MSIL">
       <HintPath>..\packages\Fare.2.1.1\lib\net35\Fare.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentAssertions, Version=5.10.3.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentAssertions.5.10.3\lib\net47\FluentAssertions.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualStudio.CodeCoverage.Shim, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeCoverage.16.8.0\lib\net45\Microsoft.VisualStudio.CodeCoverage.Shim.dll</HintPath>
@@ -79,9 +88,11 @@
     <Compile Include="AutoFixture\AutoFixtureDemos.cs" />
     <Compile Include="AutoFixture\Calculator.cs" />
     <Compile Include="AutoFixture\NameJoiner.cs" />
+    <Compile Include="AutoFixture\TcknProperyGenerator.cs" />
     <Compile Include="Coverage\CoverageShould.cs" />
     <Compile Include="DependencyInjection\DependencyInjectionShould.cs" />
     <Compile Include="DependencyInjection\DependencyNameServiceImpl.cs" />
+    <Compile Include="FluentAssertDemos\Demos.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reservation\OfferedJourneyLocationConstaint.cs" />
     <Compile Include="Reservation\OtherExamples.cs" />
@@ -99,6 +110,7 @@
     <Compile Include="TrainReservationTests\TrainReservationManagerShould.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Reservation\Data.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

@@ -1,4 +1,6 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using FluentAssertions.Execution;
+using NUnit.Framework;
 using NunitDemoLib;
 using NunitDemoLib.Entity;
 using System;
@@ -66,6 +68,44 @@ namespace UnitTests.Reservation
         }
 
         [Test]
+        public void FluentAssert_ReturnNumberOfCompanyComparison()
+        {
+            //assert
+            ComparedCompanies.Should().HaveCount(3);
+            ComparedCompanies.Should().OnlyHaveUniqueItems();
+            ComparedCompanies.Should().NotBeNullOrEmpty();
+            ComparedCompanies.Should().BeInAscendingOrder(c => c.Name);
+        }
+
+        [Test]
+        public void FluentAssert_ReturnNumberOfCompanyComparison_WithScope()
+        {
+            //assert
+            using (new AssertionScope())
+            {
+                ComparedCompanies.Should().NotBeNullOrEmpty();
+                ComparedCompanies.Should().HaveCount(4);
+                ComparedCompanies.Should().OnlyHaveUniqueItems();
+                ComparedCompanies.Should().BeInDescendingOrder(c => c.Name);
+            }
+                
+        }
+
+        [Test]
+        public void FluentAssert_ReturnNumberOfCompanyComparison_WithScope_MergeAssertions()
+        {
+            //assert
+            using (new AssertionScope())
+            {
+                ComparedCompanies.Should().NotBeNullOrEmpty()
+                                           .And.HaveCount(4)
+                                            .And.OnlyHaveUniqueItems()
+                                            .And.BeInDescendingOrder(c => c.Name);
+            }
+
+        }
+
+        [Test]
         public void ReturnContainsCompanyComparison()
         {
             //arrange
@@ -73,6 +113,16 @@ namespace UnitTests.Reservation
 
             //assert
             Assert.That(ComparedCompanies, Does.Contain(expectedCompany));
+        }
+
+        [Test]
+        public void FluentAssert_ReturnContainsCompanyComparison()
+        {
+            //arrange
+            var expectedCompany = new OfferedJourney("C3", new Vehicle("V1", new Location("IST", "ANK"), new TimeSpan(10, 00, 00), 100), 100);
+
+            //assert
+            ComparedCompanies.Should().Contain(expectedCompany);
         }
 
         [Test]

@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using DependencyInjection;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -70,5 +71,7 @@ namespace UnitTests.Reservation
 
             Assert.That(date1, Is.EqualTo(date2).Within(3).Days);
         }
+
+        
     }
 }

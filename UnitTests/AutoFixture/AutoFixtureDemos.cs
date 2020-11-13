@@ -3,9 +3,13 @@ using NUnit.Framework;
 using NunitDemoLib.Entity;
 using System;
 using System.Collections.Generic;
+using AutoFixture.NUnit3;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoFixture.AutoMoq;
+using DependencyInjection;
+using Moq;
 
 namespace UnitTests.AutoFixture
 {
@@ -239,5 +243,93 @@ namespace UnitTests.AutoFixture
                                     .Create();
         }
 
+        [Test]
+        public void CustomDatetime()
+        {
+            var fixture = new Fixture();
+            //fixture.Customize(new CurrentDateTimeCustomization());
+            fixture.Customizations.Add(new CurrentDateTimeGenerator());
+
+            var datetime = fixture.Create<DateTime>();
+        }
+
+        [Test]
+        public void ApplicantAutofixtureWithCustomTcknGenertor()
+        {
+            var fixture = new Fixture();
+            fixture.Customizations.Add(new TcknProperyGenerator());
+            var applicant = fixture.Create<Applicant>();
+        }
+
+        [Test]
+        [TestCase(1,2)]
+        [TestCase(1, 0)]
+        [TestCase(-1,1)]
+        public void DataDrivenCalculator(int num1,int num2)
+        {
+            //arrange
+            var calculator = new Calculator();
+            //act
+            calculator.Addition(num1);
+            calculator.Addition(num2);
+            //assert
+            Assert.That(calculator.Value,Is.EqualTo(num1+num2));
+        }
+
+        [Test]
+        [InlineAutoData]
+        [InlineAutoData(0)]
+        [InlineAutoData(-1)]
+        public void DataDrivenCalculatorWithAutofixture(int num1, int num2)
+        {
+            //arrange
+            var calculator = new Calculator();
+            //act
+            calculator.Addition(num1);
+            calculator.Addition(num2);
+            //assert
+            Assert.That(calculator.Value, Is.EqualTo(num1 + num2));
+        }
+
+        [Test]
+        [AutoData]
+        public void DataDrivenCalculatorWithAutofixtureVersion2(int num1, int num2)
+        {
+            //arrange
+            var calculator = new Calculator();
+            //act
+            calculator.Addition(num1);
+            calculator.Addition(num2);
+            //assert
+            Assert.That(calculator.Value, Is.EqualTo(num1 + num2));
+        }
+
+        [Test]
+        [AutoData]
+        public void DataDrivenCalculatorWithAutofixtureVersion3(int num1, int num2,Calculator calc)
+        {
+
+            //act
+            calc.Addition(num1);
+            calc.Addition(num2);
+            //assert
+            Assert.That(calc.Value, Is.EqualTo(num1 + num2));
+        }
+
+        [Test]
+        public void AutoMoqFixture()
+        {
+            //arrange
+            var fixture = new Fixture();
+
+            fixture.Customize(new AutoMoqCustomization());
+            var nameService = fixture.Freeze<Mock<IDependencyNameService>>();
+
+            var sut = fixture.Create<ConstructorInjection>();
+            //act
+            sut.SayHello();
+            //assert
+            nameService.Verify(x => x.GetName(), Times.Once);
+        }
     }
 }
